@@ -10,7 +10,6 @@
 #include <dht11.h>                            //added DHT11 humidity and temperature sensor library.
 #include <Wire.h>                             //added wire library to communicate with the i2c module.
 #include <Servo.h>                            //added servo motor library.
-#define fan 2                                 //connected fan to pin 2.
 #define DHT11PIN 3                            //connected dht11 sensor to pin 3.
 #define livingroomled 4                       //connected living rooms led to pin 4.
 #define kitchenled 5                          //connected kitchens led to pin 5.
@@ -26,7 +25,6 @@ char state;                                   //defined a variable to collect th
 
 
 void setup() {
-pinMode(2,OUTPUT);
 pinMode(4,OUTPUT);
 pinMode(5,OUTPUT);
 pinMode(7,OUTPUT);
@@ -48,20 +46,7 @@ void loop() {
  if(Serial.available()>0){    //checks if there is a command on the serial port.
     state=Serial.read();      //equalizes the command to the state variable.
   }
- if (state== '1'){                         //for the state=1.
-  analogWrite(fan,150);                    //turns on the fan.
-lcd.clear();
-lcd.setCursor(2,0);                        //prints to screen the situation.
-lcd.print("fan turned on");        
-delay(100);
- }
- if (state== '2'){                         //for the state=2.
-  analogWrite(fan,0);                      //turns off the fan.
-lcd.clear();
-lcd.setCursor(2,0);                        //prints to screen the situation.
-lcd.print("fan turned off");
-delay(100);
- }
+ 
  if (state== '3'){                         //for the state=3.
   digitalWrite(livingroomled,HIGH);        //turns on the living rooms light.
 lcd.clear();
